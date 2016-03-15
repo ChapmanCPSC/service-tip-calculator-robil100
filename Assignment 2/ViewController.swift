@@ -68,6 +68,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     {
         //will throw the error if the string is empty
         guard subtotal?.characters.count > 0 else {throw SubtotalError.invalidAmount}
+        //guard Double?(subtotal?.characters) != nil else {throw SubtotalError.invalidAmount}
+        
+        let amt : Double? = Double(self.subtotalTextField.text!)
+        
+        if amt == nil
+        {
+            throw SubtotalError.invalidAmount
+        }
         
         if subtotal!.characters.count == 1 && subtotal! == "."
         {
@@ -84,6 +92,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             
             if decimals > 1
+            {
+                throw SubtotalError.invalidAmount
+            }
+            if c == "-"
             {
                 throw SubtotalError.invalidAmount
             }
